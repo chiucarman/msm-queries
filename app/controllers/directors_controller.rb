@@ -12,4 +12,14 @@ class DirectorsController < ApplicationController
 
     render({ :template => "director_templates/details"})
   end
+
+  def junior
+   dob = Director.maximum(:dob)
+
+   matching_director = Director.where({ :dob => dob })
+
+   @youngest_director = matching_director.at(0)
+
+    render({ :template => "director_templates/youngest"})
+  end
 end
